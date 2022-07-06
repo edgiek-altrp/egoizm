@@ -943,7 +943,7 @@ pragma solidity 0.8.13;
 contract Swap_Egoizm is Ownable {
 
     IERC20 public USDT;
-    EGOIZMLIFE_Token public EGOIZM;
+    EGOIZM public EGOIZM_;
     address public contractAddress;
 
     constructor(
@@ -951,7 +951,7 @@ contract Swap_Egoizm is Ownable {
         address _EGOIZM
     ) {
         USDT = IERC20(_USDT);
-        EGOIZM = EGOIZMLIFE_Token(_EGOIZM);
+        EGOIZM_ = EGOIZM(_EGOIZM);
         contractAddress = (address(this));
     }
 
@@ -963,7 +963,7 @@ contract Swap_Egoizm is Ownable {
 
 
         USDT.safeTransferFrom(msgSender, contractAddress, amountUSDT);
-        EGOIZM.mint(msgSender, amountUSDT);
+        EGOIZM_.mint(msgSender, amountUSDT);
         
     }
 
@@ -971,9 +971,9 @@ contract Swap_Egoizm is Ownable {
 
         address msgSender = msg.sender;
         
-        EGOIZM.approve(msgSender, contractAddress, amountUSDT);
-        EGOIZM.transferFrom(msgSender, contractAddress, amountUSDT);
-        EGOIZM.burn(contractAddress, amountUSDT);
+        EGOIZM_.approve(msgSender, contractAddress, amountUSDT);
+        EGOIZM_.transferFrom(msgSender, contractAddress, amountUSDT);
+        EGOIZM_.burn(contractAddress, amountUSDT);
 
         USDT.safeTransfer(msgSender, amountUSDT);
 
